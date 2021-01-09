@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "191206641318",
+    "project_id": "blogpostapp-efe23",
+    "storage_bucket": "blogpostapp-efe23.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191206641318:android:da23b669d4b9f4424e6e67",
+        "android_client_info": {
+          "package_name": "com.geeks4ever.blogpostapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "191206641318-6quthhqiq908u6vjbcka44g8prop12cc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.geeks4ever.blogpostapp",
+            "certificate_hash": "6b768cf955aef1423bef9f07005681966fb7eaed"
+          }
+        },
+        {
+          "client_id": "191206641318-3qmuh8792uij0s75hgg14c0iibrq4dd2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbqJY3ubTmTWneHZUUDjx2eqnfwp7EyaM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "191206641318-3qmuh8792uij0s75hgg14c0iibrq4dd2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
