@@ -22,60 +22,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:animateLayoutChanges="true"
+        android:padding="20dp"
         tools:context=".view.Home">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/home_screen_status_text"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/add_post_screen_post_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textEmailAddress"
+                android:gravity="center"
+                android:hint="Write Something..."/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/add_post_screen_post_button"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:background="@color/teal_700"
-            android:text="warning"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:visibility="gone"/>
+            android:layout_margin="50dp"
+            android:layout_gravity="center"
+            android:text="post"/>
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/home_screen_add_post_button"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/add_icon"
-            android:tint="@color/purple_500"
-            android:layout_marginBottom="10dp"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/home_screen_posts_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
 
     </LinearLayout>
 
 
-
     <FrameLayout
-        android:id="@+id/home_screen_progress"
+        android:id="@+id/add_post_screen_progress"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:focusableInTouchMode="true"
         android:focusable="true"
         android:clickable="true">
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/bgshade"
-            android:alpha="0.3"/>
 
         <ProgressBar
             android:layout_width="50dp"
@@ -84,5 +75,5 @@
             android:indeterminate="true"/>
 
     </FrameLayout>
-    
+
 </FrameLayout>

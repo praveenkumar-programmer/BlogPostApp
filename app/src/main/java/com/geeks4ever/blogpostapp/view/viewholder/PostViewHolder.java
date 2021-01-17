@@ -1,3 +1,12 @@
+package com.geeks4ever.blogpostapp.view.viewholder;
+
+import android.view.View;
+
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.geeks4ever.blogpostapp.R;
+import com.google.android.material.textview.MaterialTextView;
+
 /*
  *  Created by Praveen Kumar on 17/1/21 7:38 PM for BlogPostApp.
  *  Copyright (c) 2021.
@@ -16,28 +25,21 @@
  *  You should have received a copy of the GNU General Public License along with Foobar.
  *  If not, see http://www.gnu.org/licenses/.
  */
-buildscript {
-    repositories {
-        google()
-        jcenter()
-    }
-    dependencies {
-        classpath "com.android.tools.build:gradle:4.1.0"
-        classpath 'com.google.gms:google-services:4.3.4'
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.4.1'
 
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-    }
-}
+public class PostViewHolder  extends RecyclerView.ViewHolder {
+    public MaterialTextView userId, body;
 
-allprojects {
-    repositories {
-        google()
-        jcenter()
+    public PostViewHolder(View itemView) {
+        super(itemView);
+        userId = itemView.findViewById(R.id.post_user_id);
+        body = itemView.findViewById(R.id.post_body);
     }
-}
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+    public void setUserId(String userId) {
+        this.userId.setText(userId);
+    }
+
+    public void setBody(String body) {
+        this.body.setText(body);
+    }
 }

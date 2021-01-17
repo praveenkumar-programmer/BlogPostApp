@@ -1,7 +1,6 @@
 package com.geeks4ever.blogpostapp.viewmodel;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -12,12 +11,31 @@ import androidx.lifecycle.Observer;
 import com.geeks4ever.blogpostapp.model.myFirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/*
+ *  Created by Praveen Kumar on 17/1/21 7:38 PM for BlogPostApp.
+ *  Copyright (c) 2021.
+ *  Last modified 17/1/21 7:37 PM.
+ *
+ *  This file/part of BlogPostApp is OpenSource.
+ *
+ *  BlogPostApp is free software: you can redistribute it and/or modify it under the terms of
+ *  the GNU General Public License as published by the Free Software Foundation,
+ *  either version 3 of the License, or (at your option) any later version.
+ *
+ *  BlogPostApp is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ *  without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *  See the GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License along with Foobar.
+ *  If not, see http://www.gnu.org/licenses/.
+ */
+
 public class AuthViewModel extends AndroidViewModel {
 
-    final MutableLiveData<FirebaseUser> firebaseuser = new MutableLiveData<>();
-    final MutableLiveData<Boolean> loading = new MutableLiveData<>();
+    private final MutableLiveData<FirebaseUser> firebaseuser = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> loading = new MutableLiveData<>();
 
-    final MutableLiveData<String> error = new MutableLiveData<>();
+    private final MutableLiveData<String> error = new MutableLiveData<>();
 
     private myFirebaseAuth firebaseAuth;
 
@@ -46,7 +64,7 @@ public class AuthViewModel extends AndroidViewModel {
 
     }
 
-    public LiveData<String> getError() { return error; }
+    public LiveData<String> getErrorStatus() { return error; }
 
     public LiveData<Boolean> getLoadingStatus(){
         return loading;

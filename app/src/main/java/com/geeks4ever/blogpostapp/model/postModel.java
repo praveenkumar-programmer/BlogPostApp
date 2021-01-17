@@ -1,3 +1,5 @@
+package com.geeks4ever.blogpostapp.model;
+
 /*
  *  Created by Praveen Kumar on 17/1/21 7:38 PM for BlogPostApp.
  *  Copyright (c) 2021.
@@ -16,28 +18,38 @@
  *  You should have received a copy of the GNU General Public License along with Foobar.
  *  If not, see http://www.gnu.org/licenses/.
  */
-buildscript {
-    repositories {
-        google()
-        jcenter()
-    }
-    dependencies {
-        classpath "com.android.tools.build:gradle:4.1.0"
-        classpath 'com.google.gms:google-services:4.3.4'
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.4.1'
 
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-    }
-}
+public class postModel {
 
-allprojects {
-    repositories {
-        google()
-        jcenter()
-    }
-}
+    private String postId, userId, body;
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+    public postModel(String postId, String userId, String body) {
+        this.postId = postId;
+        this.userId = userId;
+        this.body = body;
+    }
+
+    public String getPostId() {
+        return postId;
+    }
+
+    public void setPostId(String postId) {
+        this.postId = postId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
 }

@@ -6,13 +6,11 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.geeks4ever.blogpostapp.R;
-import com.geeks4ever.blogpostapp.viewmodel.AuthViewModel;
-import com.google.android.material.snackbar.Snackbar;
+import com.geeks4ever.blogpostapp.viewmodel.HomeViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -37,46 +35,32 @@ import java.util.Objects;
  *  If not, see http://www.gnu.org/licenses/.
  */
 
-public class Login extends AppCompatActivity {
+public class AddPost extends AppCompatActivity {
 
-    private AuthViewModel viewModel;
+    private HomeViewModel viewModel;
     private FrameLayout progress;
-    private TextInputEditText emailEditText, passwordEditText;
-    private CoordinatorLayout root;
+    private FirebaseUser currentUser;
+
+    private TextInputEditText postEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_add_post);
 
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Login");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Add Post");
 
-        progress = findViewById(R.id.login_screen_progress);
-        root = findViewById(R.id.login_screen_root_layout);
-
-        findViewById(R.id.login_screen_login_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                login();
-            }
-        });
-        findViewById(R.id.login_screen_signup_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signUp();
-            }
-        });
-
-        emailEditText = findViewById(R.id.login_screen_email_edit_text);
-        passwordEditText = findViewById(R.id.login_screen_password_edit_text);
+        progress = findViewById(R.id.add_post_screen_progress);
+        postEditText = findViewById(R.id.add_post_screen_post_edit_text);
 
         viewModel = new ViewModelProvider(this, new ViewModelProvider
-                .AndroidViewModelFactory(this.getApplication())).get(AuthViewModel.class);
+                .AndroidViewModelFactory(this.getApplication())).get(HomeViewModel.class);
         viewModel.getCurrentUser().observe(this, new Observer<FirebaseUser>() {
             @Override
             public void onChanged(FirebaseUser firebaseUser) {
-                if(firebaseUser != null)
-                    gotoHome();
+                currentUser = firebaseUser;
+                if(firebaseUser == null)
+                    gotoLogin();
             }
         });
 
@@ -91,27 +75,18 @@ public class Login extends AppCompatActivity {
             }
         });
 
-    }
-
-    private void login(){
-        if(emailEditText.getText() != null && passwordEditText.getText() != null)
-            viewModel.login(emailEditText.getText().toString(), passwordEditText.getText().toString());
-
-
-        viewModel.getErrorStatus().observeForever(new Observer<String>() {
+        findViewById(R.id.add_post_screen_post_button).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onChanged(String s) {
-                if(s != null){
-                    Snackbar.make(root, s, Snackbar.LENGTH_LONG).show();
+            public void onClick(View v) {
+
+                if(postEditText.getText() != null){
+                    viewModel.addPost(currentUser.getUid() , postEditText.getText().toString());
+                    finish();
                 }
             }
         });
-
     }
 
-    private void signUp(){
-        startActivity(new Intent(this, signUp.class)); finish();
-    }
 
-    private void gotoHome() { startActivity(new Intent(this, Home.class)); finish();}
+    private void gotoLogin() { startActivity(new Intent(this, Login.class)); }
 }

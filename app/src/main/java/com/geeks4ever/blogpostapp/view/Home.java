@@ -2,6 +2,7 @@ package com.geeks4ever.blogpostapp.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,18 +12,45 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.geeks4ever.blogpostapp.R;
+import com.geeks4ever.blogpostapp.model.postModel;
+import com.geeks4ever.blogpostapp.view.viewholder.PostViewHolder;
 import com.geeks4ever.blogpostapp.viewmodel.HomeViewModel;
+import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Objects;
 
+/*
+ *  Created by Praveen Kumar on 17/1/21 7:38 PM for BlogPostApp.
+ *  Copyright (c) 2021.
+ *  Last modified 17/1/21 7:37 PM.
+ *
+ *  This file/part of BlogPostApp is OpenSource.
+ *
+ *  BlogPostApp is free software: you can redistribute it and/or modify it under the terms of
+ *  the GNU General Public License as published by the Free Software Foundation,
+ *  either version 3 of the License, or (at your option) any later version.
+ *
+ *  BlogPostApp is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ *  without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *  See the GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License along with Foobar.
+ *  If not, see http://www.gnu.org/licenses/.
+ */
+
 public class Home extends AppCompatActivity {
 
     private HomeViewModel viewModel;
-
     private FrameLayout progress;
+    private MaterialTextView errortext;
+
+    private FirebaseRecyclerAdapter<postModel, PostViewHolder> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +60,12 @@ public class Home extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setTitle("Home");
 
         progress = findViewById(R.id.home_screen_progress);
+        RecyclerView recyclerView = findViewById(R.id.home_screen_posts_recycler_view);
+        errortext = findViewById(R.id.home_screen_status_text);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setHasFixedSize(true);
 
         viewModel = new ViewModelProvider(this, new ViewModelProvider
                 .AndroidViewModelFactory(this.getApplication())).get(HomeViewModel.class);
@@ -54,6 +88,51 @@ public class Home extends AppCompatActivity {
             }
         });
 
+        viewModel.getErrorStatus().observeForever(new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                if(s != null){
+                    if(errortext.getVisibility() != View.VISIBLE)
+                        errortext.setVisibility(View.VISIBLE);
+                    errortext.setText(s);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            errortext.setText("");
+                            if(errortext.getVisibility() == View.VISIBLE)
+                                errortext.setVisibility(View.GONE);
+                        }
+                    }, 2000);
+                }
+            }
+        });
+
+        findViewById(R.id.home_screen_add_post_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotoAddPost();
+            }
+        });
+
+        adapter = viewModel.getAdapter();
+        recyclerView.setAdapter(adapter);
+
+    }
+
+    private void gotoAddPost() { startActivity(new Intent(this, AddPost.class)); }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(adapter != null)
+            adapter.startListening();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(adapter != null)
+            adapter.startListening();
     }
 
     @Override
@@ -77,17 +156,9 @@ public class Home extends AppCompatActivity {
 
     }
 
-    private void exit() {
-        finish();
-    }
+    private void exit() { finish(); }
 
-    private void logout() {
-        viewModel.logout();
-    }
+    private void logout() { viewModel.logout(); }
 
-    private void gotoLogin() {
-
-        startActivity(new Intent(this, Login.class));
-
-    }
+    private void gotoLogin() { startActivity(new Intent(this, Login.class)); }
 }
