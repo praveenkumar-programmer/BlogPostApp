@@ -26,9 +26,9 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.Objects;
 
 /*
- *  Created by Praveen Kumar on 17/1/21 7:38 PM for BlogPostApp.
+ *  Created by Praveen Kumar on 17/2/21 9:22 PM for BlogPostApp.
  *  Copyright (c) 2021.
- *  Last modified 17/1/21 7:37 PM.
+ *  Last modified 17/2/21 9:21 PM.
  *
  *  This file/part of BlogPostApp is OpenSource.
  *
@@ -48,7 +48,7 @@ public class Home extends AppCompatActivity {
 
     private HomeViewModel viewModel;
     private FrameLayout progress;
-    private MaterialTextView errortext;
+    private MaterialTextView errorText;
 
     private FirebaseRecyclerAdapter<postModel, PostViewHolder> adapter;
 
@@ -61,10 +61,9 @@ public class Home extends AppCompatActivity {
 
         progress = findViewById(R.id.home_screen_progress);
         RecyclerView recyclerView = findViewById(R.id.home_screen_posts_recycler_view);
-        errortext = findViewById(R.id.home_screen_status_text);
+        errorText = findViewById(R.id.home_screen_status_text);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
         viewModel = new ViewModelProvider(this, new ViewModelProvider
@@ -92,15 +91,15 @@ public class Home extends AppCompatActivity {
             @Override
             public void onChanged(String s) {
                 if(s != null){
-                    if(errortext.getVisibility() != View.VISIBLE)
-                        errortext.setVisibility(View.VISIBLE);
-                    errortext.setText(s);
+                    if(errorText.getVisibility() != View.VISIBLE)
+                        errorText.setVisibility(View.VISIBLE);
+                    errorText.setText(s);
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            errortext.setText("");
-                            if(errortext.getVisibility() == View.VISIBLE)
-                                errortext.setVisibility(View.GONE);
+                            errorText.setText("");
+                            if(errorText.getVisibility() == View.VISIBLE)
+                                errorText.setVisibility(View.GONE);
                         }
                     }, 2000);
                 }

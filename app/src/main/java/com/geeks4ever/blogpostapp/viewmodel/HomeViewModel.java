@@ -20,9 +20,9 @@ import com.geeks4ever.blogpostapp.view.viewholder.PostViewHolder;
 import com.google.firebase.auth.FirebaseUser;
 
 /*
- *  Created by Praveen Kumar on 17/1/21 7:38 PM for BlogPostApp.
+ *  Created by Praveen Kumar on 17/2/21 9:22 PM for BlogPostApp.
  *  Copyright (c) 2021.
- *  Last modified 17/1/21 7:37 PM.
+ *  Last modified 17/2/21 9:02 PM.
  *
  *  This file/part of BlogPostApp is OpenSource.
  *
@@ -99,6 +99,11 @@ public class HomeViewModel extends AndroidViewModel {
                 holder.setBody(model.getBody());
             }
 
+            @NonNull
+            @Override
+            public postModel getItem(int position) {
+                return super.getItem(getItemCount() - 1 - position);
+            }
         };
 
     }

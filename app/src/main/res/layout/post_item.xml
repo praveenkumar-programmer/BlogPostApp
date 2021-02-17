@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~  Created by Praveen Kumar on 17/1/21 7:38 PM for BlogPostApp.
+  ~  Created by Praveen Kumar on 17/2/21 9:22 PM for BlogPostApp.
   ~  Copyright (c) 2021.
-  ~  Last modified 17/1/21 7:37 PM.
+  ~  Last modified 17/2/21 9:02 PM.
   ~
   ~  This file/part of BlogPostApp is OpenSource.
   ~
@@ -23,8 +23,6 @@
     android:orientation="vertical"
     android:background="@drawable/rect_bg"
     android:elevation="3dp"
-    android:layout_marginStart="16dp"
-    android:layout_marginEnd="16dp"
     android:layout_marginBottom="5dp"
     android:layout_marginTop="5dp"
     android:layout_width="match_parent"
@@ -37,23 +35,43 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/post_profile_pic"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_margin="15dp"
             app:shapeAppearance="@drawable/circular_bg"
             android:src="@drawable/face_icon"
             android:tint="@color/purple_500"/>
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/post_user_id"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="USER ID"
-            android:gravity="start"
-            android:textStyle="bold"
-            android:textSize="10sp"
-            android:layout_marginEnd="70dp"
-            android:layout_gravity="center"/>
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_marginEnd="25dp"
+            android:orientation="vertical">
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/post_user_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="user name"
+                android:gravity="start"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/text_medium"
+                android:layout_gravity="center"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/post_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="11:23 pm\t\t\t15/02/20"
+                android:gravity="start"
+                android:textSize="16sp"
+                android:textColor="@color/text_lite"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -61,10 +79,18 @@
         android:id="@+id/post_body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Post body content ksajghkbkbasfkakjhfajhfjhkjsdhfkljhasljkdhfljhsdfkashjkdhfash"
-        android:textSize="18sp"
+        android:text="Post body content ksajghasfkakjhfajhfjhkjsdhfkljhasljkdhfljhsdfkashjkdhfash"
+        android:textSize="16sp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"/>
+        android:textColor="@color/text_dark"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/post_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/image_icon"
+        android:layout_margin="20dp"
+        android:scaleType="fitCenter"/>
 
 </LinearLayout>

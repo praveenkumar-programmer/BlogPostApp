@@ -1,7 +1,7 @@
 <!--
-  ~  Created by Praveen Kumar on 17/1/21 7:38 PM for BlogPostApp.
+  ~  Created by Praveen Kumar on 17/2/21 9:22 PM for BlogPostApp.
   ~  Copyright (c) 2021.
-  ~  Last modified 17/1/21 7:37 PM.
+  ~  Last modified 17/2/21 9:02 PM.
   ~
   ~  This file/part of BlogPostApp is OpenSource.
   ~
@@ -19,7 +19,7 @@
 
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.BlogPostApp" parent="Theme.MaterialComponents.DayNight">
+    <style name="Theme.BlogPostApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>

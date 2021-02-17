@@ -19,9 +19,9 @@ import java.util.Objects;
 
 
 /*
- *  Created by Praveen Kumar on 17/1/21 7:38 PM for BlogPostApp.
+ *  Created by Praveen Kumar on 17/2/21 9:22 PM for BlogPostApp.
  *  Copyright (c) 2021.
- *  Last modified 17/1/21 7:37 PM.
+ *  Last modified 17/2/21 9:02 PM.
  *
  *  This file/part of BlogPostApp is OpenSource.
  *
@@ -51,6 +51,8 @@ public class myRepository {
     private myRepository(){
 
         firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseDatabase.setPersistenceEnabled(true);
+        firebaseDatabase.getReference().child("posts").keepSynced(true);
 
         postRecyclerOptions = new FirebaseRecyclerOptions.Builder<postModel>()
                     .setQuery(firebaseDatabase.getReference().child("posts"),
