@@ -63,8 +63,11 @@ public class Home extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.home_screen_posts_recycler_view);
         errorText = findViewById(R.id.home_screen_status_text);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(layoutManager);
+//        recyclerView.setHasFixedSize(true);
 
         viewModel = new ViewModelProvider(this, new ViewModelProvider
                 .AndroidViewModelFactory(this.getApplication())).get(HomeViewModel.class);

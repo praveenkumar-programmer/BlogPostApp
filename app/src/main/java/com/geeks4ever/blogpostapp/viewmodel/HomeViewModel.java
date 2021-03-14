@@ -92,7 +92,6 @@ public class HomeViewModel extends AndroidViewModel {
                 return new PostViewHolder(view);
             }
 
-
             @Override
             protected void onBindViewHolder(PostViewHolder holder, final int position, postModel model) {
                 holder.setUserId(model.getUserId());
@@ -102,7 +101,7 @@ public class HomeViewModel extends AndroidViewModel {
             @NonNull
             @Override
             public postModel getItem(int position) {
-                return super.getItem(getItemCount() - 1 - position);
+                return super.getItem(position);
             }
         };
 
